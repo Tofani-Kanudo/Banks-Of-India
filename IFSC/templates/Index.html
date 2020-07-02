@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banks of India</title>
+</head>
+<body style="text-align: center;">
+    <div class="container-fluid">
+        <fieldset>
+            <legend>Search using IFSC CODE</legend>
+            <form action="{% url 'search' %}" method="get" name="fsc">
+                <label for="IFSC">IFSC CODE</label>
+                <input type="text" name="IFSC" id="IFSC"><br>
+                <input type="submit" value="Search" class="btn btn-success btn-lg">
+            </form>
+        </fieldset>
+        <FIeldset>
+            <legend>Search using Banks and City</legend>
+            <form action="{% url 'search' %}" method="get" name="branch">
+                <label for="bank">Bank</label>
+                <input type="text" name="bank" id="bank"><br>
+                <label for="city">City</label>
+                <input type="text" name="city" id="city"><br>
+                <input type="submit" value="Search" class="btn btn-success btn-lg">
+            </form>
+        </FIeldset>
+        {% if res %}
+        <h2 style="text-align: center;padding-top: 10px;">{{res}}</h2>
+        <hr style="background-color: white;width: 300px;"><br>
+        {% if branch %}
+        <div class="col mb-4">
+            <div class="card border-dark h-100">
+              <h5 class="card-header">{{branch.ifsc}}</h5>
+              <div class="card-body text-dark">
+                <p class="card-text">{{branch.address}}</p>
+              </div>
+              <h6 class="card-footer bg-transparent border-dark">{{branch.branch}}</h6>
+            </div>
+        </div>
+        {% endif %}
+        {% if city %}
+        <div class="row row-cols-1 row-cols-md-3">
+        {% for c in city %}
+            <div class="col mb-4">
+              <div class="card border-dark h-100">
+                <h5 class="card-header">{{c.ifsc}}</h5>
+                <div class="card-body text-dark">
+                  <p class="card-text">{{c.address}}</p>
+                </div>
+                <h6 class="card-footer bg-transparent border-dark">{{c.branch}}</h6>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
